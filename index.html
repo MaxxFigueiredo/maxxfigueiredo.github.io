@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxx Estúdio — Vídeo, Animação & Ilustração</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap');
+
+  :root{
+    --black:#0a0a0a;
+    --offblack:#141414;
+    --white:#f5f3ee;
+    --gold:#c9912a;
+    --gold-dim:#8a6a26;
+    --line: rgba(245,243,238,0.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Barlow', sans-serif;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.eyebrow,.nav-logo{font-family:'Bebas Neue', sans-serif; letter-spacing:.03em;}
+  .cond{font-family:'Barlow Condensed', sans-serif;}
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 6vw;
+    background:linear-gradient(to bottom, rgba(10,10,10,0.9), transparent);
+  }
+  .nav-logo{font-size:22px; color:var(--white);}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{display:flex; gap:36px; font-family:'Barlow Condensed', sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:.08em;}
+  .nav-links a{position:relative; opacity:.8; transition:opacity .2s;}
+  .nav-links a:hover{opacity:1; color:var(--gold);}
+
+  /* ===== HERO ===== */
+  .hero{
+    height:100vh; min-height:680px;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:0 6vw;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grain{
+    position:absolute; inset:0; pointer-events:none; opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .hero-eyebrow{
+    font-family:'Barlow Condensed', sans-serif; text-transform:uppercase;
+    color:var(--gold); letter-spacing:.25em; font-size:14px; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(64px, 13vw, 168px);
+    line-height:.92;
+    color:var(--white);
+  }
+  .hero h1 .out{ -webkit-text-stroke:1.5px var(--white); color:transparent; }
+  .hero-sub{
+    margin-top:28px; max-width:560px;
+    font-size:18px; line-height:1.6; color:rgba(245,243,238,.7);
+  }
+  .reel{
+    position:absolute; right:6vw; bottom:60px;
+    display:flex; gap:10px; align-items:flex-end;
+  }
+  .reel .sprocket{
+    width:14px; height:14px; border:2px solid var(--gold-dim); border-radius:2px;
+  }
+  .scroll-cue{
+    position:absolute; bottom:32px; left:6vw;
+    font-family:'Barlow Condensed', sans-serif; font-size:13px; letter-spacing:.15em;
+    text-transform:uppercase; color:rgba(245,243,238,.45);
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue::after{
+    content:''; width:1px; height:34px; background:var(--gold-dim);
+    animation:dropline 2s ease-in-out infinite;
+  }
+  @keyframes dropline{0%,100%{transform:scaleY(.4); opacity:.4;}50%{transform:scaleY(1); opacity:1;}}
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:120px 6vw;}
+  .section-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:64px; flex-wrap:wrap; gap:20px;}
+  .section-head h2{font-size:clamp(40px,6vw,72px); color:var(--white);}
+  .section-head .eyebrow{color:var(--gold); font-size:14px; text-transform:uppercase; letter-spacing:.2em; font-family:'Barlow Condensed';}
+  .section-num{font-family:'Barlow Condensed'; font-size:14px; color:rgba(245,243,238,.4); letter-spacing:.1em;}
+
+  /* ===== WORK / DISCIPLINAS ===== */
+  .disciplinas{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .disc-card{
+    background:var(--black); padding:48px 36px; min-height:380px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:background .3s;
+    position:relative; overflow:hidden;
+  }
+  .disc-card:hover{background:var(--offblack);}
+  .disc-card .tag{font-family:'Barlow Condensed'; text-transform:uppercase; letter-spacing:.15em; font-size:13px; color:rgba(245,243,238,.45);}
+  .disc-card h3{font-size:44px; margin-top:18px; color:var(--white);}
+  .disc-card p{margin-top:18px; color:rgba(245,243,238,.65); font-size:15px; line-height:1.6; max-width:300px;}
+  .disc-card .mark{
+    position:absolute; right:-20px; bottom:-40px; font-family:'Bebas Neue'; font-size:160px;
+    color:rgba(201,145,42,0.06); line-height:1; user-select:none;
+  }
+  .disc-card .more{margin-top:28px; font-family:'Barlow Condensed'; text-transform:uppercase; font-size:13px; letter-spacing:.1em; color:var(--gold);}
+
+  /* ===== TIMELINE (FILM STRIP) ===== */
+  .timeline-wrap{position:relative;}
+  .timeline-track{
+    display:flex; overflow-x:auto; gap:0; padding-bottom:30px;
+    scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent;
+  }
+  .timeline-track::-webkit-scrollbar{height:6px;}
+  .timeline-track::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+  .frame{
+    flex:0 0 280px; border-left:1px solid var(--line);
+    padding:0 28px; position:relative;
+  }
+  .frame:first-child{border-left:none;}
+  .frame::before{
+    content:''; position:absolute; top:0; left:28px; width:34px; height:6px;
+    background:repeating-linear-gradient(90deg, var(--gold-dim) 0 4px, transparent 4px 9px);
+  }
+  .frame-year{font-family:'Bebas Neue'; font-size:46px; color:var(--gold); margin-top:36px;}
+  .frame h4{font-size:20px; margin-top:14px; color:var(--white); font-family:'Barlow Condensed'; font-weight:700; letter-spacing:.02em;}
+  .frame p{margin-top:10px; font-size:14px; color:rgba(245,243,238,.6); line-height:1.55;}
+
+  /* ===== SELECTED WORKS ===== */
+  .works-grid{display:flex; flex-direction:column; border-top:1px solid var(--line);}
+  .work-row{
+    display:grid; grid-template-columns:120px 1fr 200px 160px;
+    align-items:center; gap:24px; padding:30px 0;
+    border-bottom:1px solid var(--line);
+    transition:padding-left .25s;
+  }
+  .work-row:hover{padding-left:14px; background:rgba(201,145,42,0.03);}
+  .work-row .wnum{font-family:'Barlow Condensed'; color:rgba(245,243,238,.35); font-size:14px;}
+  .work-row .wtitle{font-size:26px; font-family:'Barlow Condensed'; font-weight:600; color:var(--white);}
+  .work-row .wtype{font-family:'Barlow Condensed'; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold);}
+  .work-row .wyear{font-family:'Barlow Condensed'; font-size:14px; color:rgba(245,243,238,.45); text-align:right;}
+
+  /* ===== CONTACT ===== */
+  .contact{
+    border-top:1px solid var(--line);
+    text-align:center;
+    padding:140px 6vw 90px;
+  }
+  .contact .eyebrow{color:var(--gold); text-transform:uppercase; letter-spacing:.2em; font-family:'Barlow Condensed'; font-size:14px;}
+  .contact h2{font-size:clamp(36px,7vw,90px); margin-top:18px; color:var(--white); line-height:1.05;}
+  .contact-link{
+    display:inline-block; margin-top:40px; padding:16px 40px;
+    border:1px solid var(--gold); color:var(--gold);
+    font-family:'Barlow Condensed'; text-transform:uppercase; letter-spacing:.12em; font-size:14px;
+    transition:background .25s, color .25s;
+  }
+  .contact-link:hover{background:var(--gold); color:var(--black);}
+
+  footer{
+    padding:30px 6vw; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:'Barlow Condensed'; font-size:13px; color:rgba(245,243,238,.4);
+  }
+
+  @media(max-width:860px){
+    .disciplinas{grid-template-columns:1fr;}
+    .work-row{grid-template-columns:1fr; gap:6px; text-align:left;}
+    .work-row .wyear{text-align:left;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MAXX<span>.</span>ESTÚDIO</div>
+  <div class="nav-links">
+    <a href="#disciplinas">Disciplinas</a>
+    <a href="#linha-do-tempo">Linha do Tempo</a>
+    <a href="#trabalhos">Trabalhos</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-eyebrow">São Paulo — Conteúdo Audiovisual & IA</div>
+  <h1>VÍDEO.<br><span class="out">ANIMAÇÃO.</span><br>ILUSTRAÇÃO.</h1>
+  <p class="hero-sub">Maxx Estúdio cria personas, eventos e narrativas audiovisuais — do roteiro ao quadro final, combinando direção de criação com fluxos de produção em IA generativa.</p>
+  <div class="reel">
+    <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+    <div class="sprocket"></div><div class="sprocket"></div>
+  </div>
+  <div class="scroll-cue">Role para ver o trabalho</div>
+</section>
+
+<section id="disciplinas">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">O que fazemos</div>
+      <h2>Disciplinas</h2>
+    </div>
+    <div class="section-num">03 FRENTES</div>
+  </div>
+  <div class="disciplinas">
+    <div class="disc-card">
+      <div>
+        <div class="tag">Produção Audiovisual</div>
+        <h3>Vídeo</h3>
+        <p>Curtas, conteúdo de marca, cobertura de eventos e vídeo vertical para redes — da captação à finalização.</p>
+      </div>
+      <div class="more">Ver projetos →</div>
+      <div class="mark">01</div>
+    </div>
+    <div class="disc-card">
+      <div>
+        <div class="tag">Personagens & Motion</div>
+        <h3>Animação</h3>
+        <p>Personagens autorais, motion design e narrativas animadas com fluxo de produção em IA generativa.</p>
+      </div>
+      <div class="more">Ver projetos →</div>
+      <div class="mark">02</div>
+    </div>
+    <div class="disc-card">
+      <div>
+        <div class="tag">Direção de Arte</div>
+        <h3>Ilustração</h3>
+        <p>Identidade visual, storyboards e peças gráficas que sustentam cada universo criativo do estúdio.</p>
+      </div>
+      <div class="more">Ver projetos →</div>
+      <div class="mark">03</div>
+    </div>
+  </div>
+</section>
+
+<section id="linha-do-tempo">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Trajetória</div>
+      <h2>Linha do Tempo</h2>
+    </div>
+    <div class="section-num">ARRASTE →</div>
+  </div>
+  <div class="timeline-wrap">
+    <div class="timeline-track">
+      <div class="frame">
+        <div class="frame-year">Castelo</div>
+        <h4>Castelo Rá-Tim-Bum</h4>
+        <p>Atuação em produção de referência na TV brasileira infantil.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">Folha</div>
+        <h4>Folha de S.Paulo</h4>
+        <p>Projetos audiovisuais para um dos maiores veículos de imprensa do país.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">RiR</div>
+        <h4>Rock in Rio</h4>
+        <p>Produção de conteúdo para um dos maiores festivais do mundo.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">Lisboa</div>
+        <h4>Trabalho Internacional</h4>
+        <p>Projetos audiovisuais desenvolvidos em Lisboa, Portugal.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">BCN</div>
+        <h4>Barcelona</h4>
+        <p>Extensão do trabalho internacional do estúdio na Espanha.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">Livro</div>
+        <h4>Publicação</h4>
+        <p>Autoria de livro publicado, consolidando a trajetória criativa.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">Palco</div>
+        <h4>Palestrante</h4>
+        <p>Apresentações sobre criação, personas e produção audiovisual.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">SHA</div>
+        <h4>SHA Eventos</h4>
+        <p>Frente de produção de eventos do estúdio, do conceito à execução.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-year">Hoje</div>
+        <h4>Maxx Estúdio + IA</h4>
+        <p>Produção audiovisual integrando ferramentas de IA generativa ao fluxo criativo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trabalhos">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Seleção</div>
+      <h2>Trabalhos</h2>
+    </div>
+    <div class="section-num">EM DESTAQUE</div>
+  </div>
+  <div class="works-grid">
+    <div class="work-row">
+      <div class="wnum">01</div>
+      <div class="wtitle">Fritzi — Boop-Oop-A-Doop</div>
+      <div class="wtype">Curta / Animação</div>
+      <div class="wyear">2026</div>
+    </div>
+    <div class="work-row">
+      <div class="wnum">02</div>
+      <div class="wtitle">Abdução no Estádio</div>
+      <div class="wtype">Curta / Ficção</div>
+      <div class="wyear">2026</div>
+    </div>
+    <div class="work-row">
+      <div class="wnum">03</div>
+      <div class="wtitle">ViNey Jr.</div>
+      <div class="wtype">Vídeo / Comédia</div>
+      <div class="wyear">2026</div>
+    </div>
+    <div class="work-row">
+      <div class="wnum">04</div>
+      <div class="wtitle">SHA Eventos</div>
+      <div class="wtype">Produção de Evento</div>
+      <div class="wyear">—</div>
+    </div>
+    <div class="work-row">
+      <div class="wnum">05</div>
+      <div class="wtitle">Mercadores do Impossível</div>
+      <div class="wtype">Campanha / Vídeo</div>
+      <div class="wyear">—</div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <div class="eyebrow">Vamos criar</div>
+  <h2>Conte sua história.</h2>
+  <a class="contact-link" href="mailto:contato@maxxestudio.com">Falar com o estúdio</a>
+</section>
+
+<footer>
+  <div>Maxx Estúdio — São Paulo, Brasil</div>
+  <div>© 2026</div>
+</footer>
+
+</body>
+</html>
