@@ -53,13 +53,9 @@
     border-bottom:1px solid var(--line);
     overflow:hidden;
     background:var(--black);
-    perspective: 900px;
   }
   .hero-img-wrap{
     position:absolute; inset:0;
-    transform-style:preserve-3d;
-    will-change:transform;
-    transition: transform .25s ease-out;
   }
   .hero-img-wrap img{
     width:100%; height:100%; object-fit:cover; object-position:center;
@@ -77,16 +73,16 @@
 
   .goggle-date{
     position:absolute;
-    left:41%; top:36.5%; width:18.5%; height:9.5%;
-    display:flex; align-items:center; justify-content:center; gap:4%;
+    left:43.9%; top:36.3%; width:12.6%; height:6.8%;
+    display:flex; align-items:center; justify-content:space-between;
     pointer-events:none;
   }
   .goggle-date span{
     font-family:'Share Tech Mono', monospace;
-    color:var(--red);
-    font-size:clamp(10px, 2.6vw, 30px);
-    text-shadow: 0 0 8px rgba(255,45,45,.85), 0 0 18px rgba(255,45,45,.5);
-    letter-spacing:.04em;
+    color:var(--orange);
+    font-size:clamp(8px, 2vw, 22px);
+    text-shadow: 0 0 8px rgba(242,99,34,.9), 0 0 16px rgba(242,99,34,.55);
+    letter-spacing:.02em;
   }
 
   .hero-brand{
@@ -433,42 +429,6 @@
     document.getElementById('whatsLink').href = `https://wa.me/5511974177102?text=${waText}`;
   })();
 
-  (function(){
-    const hero = document.getElementById('hero');
-    const imgWrap = document.getElementById('heroImgWrap');
-    let raf = null;
-
-    function handleMove(clientX, clientY){
-      const rect = hero.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const cy = rect.top + rect.height/2;
-      const dx = (clientX - cx) / (rect.width/2);
-      const dy = (clientY - cy) / (rect.height/2);
-
-      const maxRotY = 9;
-      const maxRotX = 6;
-      const maxShift = 10;
-
-      const rotY = Math.max(-1, Math.min(1, dx)) * maxRotY;
-      const rotX = Math.max(-1, Math.min(1, -dy)) * maxRotX;
-      const shiftX = Math.max(-1, Math.min(1, dx)) * maxShift;
-      const shiftY = Math.max(-1, Math.min(1, dy)) * (maxShift*0.5);
-
-      if(raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(()=>{
-        imgWrap.style.transform =
-          `rotateY(${rotY}deg) rotateX(${rotX}deg) translate(${shiftX}px, ${shiftY}px) scale(1.04)`;
-      });
-    }
-
-    window.addEventListener('mousemove', (e)=> handleMove(e.clientX, e.clientY));
-    window.addEventListener('mouseleave', ()=>{
-      imgWrap.style.transform = 'rotateY(0deg) rotateX(0deg) translate(0,0) scale(1)';
-    });
-    window.addEventListener('touchmove', (e)=>{
-      if(e.touches && e.touches[0]) handleMove(e.touches[0].clientX, e.touches[0].clientY);
-    }, {passive:true});
-  })();
 </script>
 
 </body>
